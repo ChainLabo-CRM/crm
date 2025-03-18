@@ -4,7 +4,9 @@
       <Button
         ref="sendEmailRef"
         variant="ghost"
-        :class="[showEmailBox ? '!bg-surface-gray-4 hover:!bg-surface-gray-3' : '']"
+        :class="[
+          showEmailBox ? '!bg-surface-gray-4 hover:!bg-surface-gray-3' : '',
+        ]"
         :label="__('Reply')"
         @click="toggleEmailBox()"
       >
@@ -15,7 +17,9 @@
       <Button
         variant="ghost"
         :label="__('Comment')"
-        :class="[showCommentBox ? '!bg-surface-gray-4 hover:!bg-surface-gray-3' : '']"
+        :class="[
+          showCommentBox ? '!bg-surface-gray-4 hover:!bg-surface-gray-3' : '',
+        ]"
         @click="toggleCommentBox()"
       >
         <template #prefix>
@@ -152,7 +156,7 @@ watch(
       editor.commands.focus()
       setSignature(editor)
     }
-  }
+  },
 )
 
 watch(
@@ -161,7 +165,7 @@ watch(
     if (value) {
       newCommentEditor.value.editor.commands.focus()
     }
-  }
+  },
 )
 
 const commentEmpty = computed(() => {
@@ -221,6 +225,7 @@ async function submitEmail() {
   reload.value = true
   emit('scroll')
   capture('email_sent', { doctype: props.doctype })
+  window.location.reload()
 }
 
 async function submitComment() {
